@@ -11,6 +11,9 @@ The options which you may set in your 'project.clj':
 If these options weren't set, lein-noir-gen will use the default namespace; the name of the database is also a default namespace.
 
 ## Usage
+Install:
+lein plugin install lein-noir-gen 0.1.0
+
 Run it from the root of your web-application.
 
 lein noir-gen <my-entity> <field1> <field2> ... <fieldN>
