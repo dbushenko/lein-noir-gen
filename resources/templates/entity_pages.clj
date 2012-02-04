@@ -1,30 +1,35 @@
 (ns {{namespace}}.views.{{entity}}_pages
-  (:require [{{namespace}}.views.common :as common]
-            [noir.response :as resp]
-            [{{namespace}}.views.{{entity}}_templates :as {{entity}}-view]
-            [{{namespace}}.models.{{entity}}_model :as {{entity}}-model])
-  (:use [noir.core]))
+    (:require [{{namespace}}.views.default :as default]
+              [noir.response :as resp]
+              [{{namespace}}.views.{{entity}}_templates :as {{entity}}-view]
+              [{{namespace}}.models.{{entity}}_model :as {{entity}}-model])
+    (:use [noir.core]
+          [clojure.string]))
 
 (defpage {{entity}}-list "/{{entity}}" []
-  (common/layout
-   ({{entity}}-view/show-list ({{entity}}-model/fetch-list))))
+  (default/layout
+    [:h2 (str (capitalize "{{entity}}") " list")]
+    ({{entity}}-view/show-list ({{entity}}-model/fetch-list))))
 
 (defpage view-{{entity}} "/{{entity}}/view/:id" {id :id}
-  (common/layout
-   ({{entity}}-view/show ({{entity}}-model/fetch id))))
+  (default/layout
+    [:h2 (str "View {{entity}}")]
+    ({{entity}}-view/show ({{entity}}-model/fetch id))))
 
 (defpage edit-{{entity}} "/{{entity}}/edit/:id" {id :id}
   (let [item ({{entity}}-model/fetch id)]
-    (common/layout
-     ({{entity}}-view/form (url-for update-{{entity}} {:id id}) "Update" {{#fields}}(:{{name}} item) {{/fields}}))))
+    (default/layout
+      [:h2 (str "Edit {{entity}}")]
+      ({{entity}}-view/form (url-for update-{{entity}} {:id id}) "Update" {{#fields}}(:{{name}} item) {{/fields}}))))
 
 (defpage update-{{entity}} [:post "/{{entity}}/update/:id"] {:keys [id {{#fields}}{{name}} {{/fields}}]}
   ({{entity}}-model/update id {{#fields}}{{name}} {{/fields}})
   (resp/redirect (url-for view-{{entity}} {:id id})))
 
 (defpage new-{{entity}} "/{{entity}}/new" []
-  (common/layout
-   ({{entity}}-view/form (url-for create-{{entity}}) "Create")))
+  (default/layout
+    [:h2 (str "New {{entity}}")]
+    ({{entity}}-view/form (url-for create-{{entity}}) "Create")))
 
 (defpage create-{{entity}} [:post "/{{entity}}/create"] {:keys [{{#fields}}{{name}} {{/fields}}]}
   ({{entity}}-model/create {{#fields}}{{name}} {{/fields}})

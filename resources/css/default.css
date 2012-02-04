@@ -1,0 +1,14 @@
+.default-body {
+    background-color: #dff0d8;
+}
+
+.default-header {
+    background-color: #88b8d0;
+    padding:10px;
+}
+
+.default-content {
+    background-color: #fff;
+    min-height: 100px;
+    padding:10px;
+}
