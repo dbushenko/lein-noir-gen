@@ -7,9 +7,8 @@
                                     :port 27017)))
 
 (defn next-id [name]
-  (fetch-and-modify :counters
+  (:value (fetch-and-modify :counters
                     {:name name}
                     {:$inc {:value 1}}
-                    :upsert? true)
-  (:value (fetch-one :counters
-                     :where {:name name})))
+                    :upsert? true
+                    :return-new? true)))
