@@ -22,7 +22,7 @@ Warning: you must have no previous versions of lein-noir-gen installed. You may 
 
 Run it from the root of your web-application.
 
-lein noir-gen <my-entity> <field1> <field2> ... <fieldN>
+lein noir-gen my-entity field1 field2 ... fieldN
 
 $ lein noir-gen article title body author date published
 
