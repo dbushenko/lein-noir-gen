@@ -16,7 +16,9 @@ If these options weren't set, lein-noir-gen will use the default namespace; the 
 
 ## Usage
 Install:
-lein plugin install lein-noir-gen 0.2.0
+lein plugin install lein-noir-gen 0.2.1
+
+Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually from $HOME/.lein/plugins/
 
 Run it from the root of your web-application.
 
