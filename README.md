@@ -16,7 +16,7 @@ If these options weren't set, lein-noir-gen will use the default namespace; the 
 
 ## Usage
 Install:
-lein plugin install lein-noir-gen 0.2.1
+lein plugin install lein-noir-gen 0.3.0
 
 Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually from $HOME/.lein/plugins/
 
@@ -26,8 +26,15 @@ lein noir-gen my-entity field1 field2 ... fieldN
 
 $ lein noir-gen article title body author date published
 
+If you want more complex directory structure, use dots "." in your entity string.
+
+lein noir-gen entity.subentity1 field1 field2 ... fieldN
+lein noir-gen entity.subentity2 field1 field2 ... fieldN
+lein noir-gen another-entity.subentity field1 field2 ... fieldN
+
+Enjoy!
 ## License
 
-Copyright (C) 2012 Dmitry Bushenko
+Copyright (C) 2012 Dmitry Bushenko, Hoang Minh Thang
 
 Distributed under the Eclipse Public License, the same as Clojure.
