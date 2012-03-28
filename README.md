@@ -34,8 +34,26 @@ $ lein noir-gen entity.subentity2 field1 field2 ... fieldN
 
 $ lein noir-gen another-entity.subentity field1 field2 ... fieldN
 
+## Step by step (newproject)
+
+$ lein noir new project-name
+
+$ cd project-name
+
+Add [congomongo "0.1.7"] to project.clj
+
+Enjoy cruding!
+
+Start mongod:
+
+$ mongod --dbpath path-to-your-db
+
+Then run:
+
+$ lein run
 
 Enjoy!
+
 ## License
 
 Copyright (C) 2012 Dmitry Bushenko, Hoang Minh Thang
