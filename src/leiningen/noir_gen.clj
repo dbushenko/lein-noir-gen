@@ -11,10 +11,15 @@
   (let [pages (render (slurp-resource (str "templates/entity_pages.clj"))
                       {:namespace namespace,
                        :entity entity,
+                       :entity-title (make-title entity),
+                       :entity_path (path-to-entity entity),
+                       :param (parameterize-entity entity),
                        :fields fields})
         templates (render (slurp-resource (str "templates/entity_templates.clj"))
                           {:namespace namespace,
                            :entity entity,
+                            :entity_path (path-to-entity entity),
+                            :param (parameterize-entity entity),
                            :fields fields})
         model (render (slurp-resource (str "templates/entity_model.clj"))
                       {:namespace namespace,
@@ -27,9 +32,9 @@
                     {:namespace namespace})
         default (render (slurp-resource (str "templates/default.clj"))
                     {:namespace namespace})]
-    (->file (str "./src/" namespace "/views/" entity "_pages.clj") pages)
-    (->file (str "./src/" namespace "/views/" entity "_templates.clj") templates)
-    (->file (str "./src/" namespace "/models/" entity "_model.clj") model)
+    (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_pages.clj") pages)
+    (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_templates.clj") templates)
+    (->file (str "./src/" namespace "/models/" (path-to-entity entity) "_model.clj") model)
     (->file (str "./src/" namespace "/db.clj") db)
     (->file (str "./src/" namespace "/server.clj") srv)
     (->file (str "./src/" namespace "/views/default.clj") default)
@@ -45,5 +50,5 @@ Options which you may set in project.clj:
            database (or (:database (:noir-gen project)) (:group project))]
        (generate namespace entity (map #(hash-map :name %) fields) database))
      (println (str "The entity '" entity "' was successfully generated!"))
-     (println "Add dependency to your 'project.clj' for congo-mongo like that:")
+     (println "Remember adding dependency to your 'project.clj' for congo-mongo like that:")
      (println "[congomongo \"0.1.7\"]")))
