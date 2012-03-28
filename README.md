@@ -28,9 +28,12 @@ $ lein noir-gen article title body author date published
 
 If you want more complex directory structure, use dots "." in your entity string.
 
-lein noir-gen entity.subentity1 field1 field2 ... fieldN
-lein noir-gen entity.subentity2 field1 field2 ... fieldN
-lein noir-gen another-entity.subentity field1 field2 ... fieldN
+$ lein noir-gen entity.subentity1 field1 field2 ... fieldN
+
+$ lein noir-gen entity.subentity2 field1 field2 ... fieldN
+
+$ lein noir-gen another-entity.subentity field1 field2 ... fieldN
+
 
 Enjoy!
 ## License
