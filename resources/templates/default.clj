@@ -1,7 +1,6 @@
 (ns {{namespace}}.views.default
   (:use [noir.core :only [defpartial]]
-        [hiccup.page-helpers :only [include-css html5]]
-        [clojure.string]))
+        [hiccup.page-helpers :only [include-css html5]]))
 
 (defpartial layout [& content]
   (html5
@@ -13,7 +12,7 @@
     [:div {:class "container default-header"}
      [:div {:class "row"}
       [:div {:class "span12"}
-       [:h1 {:style "color:#fff"} (capitalize "{{namespace}}")]]]]
+       [:h1 {:style "color:#fff"} (clojure.string/capitalize "{{namespace}}")]]]]
      
     [:div {:class "container default-content"}
      [:div {:class "row"}
