@@ -44,7 +44,7 @@ Add [congomongo "0.1.7"] to project.clj
 
 Enjoy cruding!
 
-Start mongod:
+Now test generated stuffs. Start mongod (in an other terminator, because you don't want to stop it, right?)
 
 $ mongod --dbpath path-to-your-db
 
