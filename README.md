@@ -2,11 +2,23 @@
 This is a CRUD-actions generator for a Noir-project. It is heavily inspired by the Rails generators.
 Noir-gen creates default view and model for the specified entity. It uses the Mongodb to store the models.
 
-The generated pages have some basic layout made with Bootstrap. The examples of generated pages are here:
-https://docs.google.com/open?id=0BzmL7xzGeOtOYjFkZjg4ZjQtYjMwNy00N2M4LTg2MzQtOGFhYzFhYmJkMWEy
-https://docs.google.com/open?id=0BzmL7xzGeOtOMmY4MDNlMjItODU5ZS00Y2Q1LWEzM2EtZGM1ZDRiNDUxMDk0
+## Overview
 
-While generating, it rewrites the file 'server.clj' -- do not edit it manually. Also you need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.7"]. Each time you generate an entity, lein-noir-gen will tell you to add the dependency.
+The plugin comes with three commands:
+
+$ lein noir-gen setup
+
+will prepare such things like db.clj, server.clj, views/default.clj and some other resources. In most case you have to run it only once
+
+$ lein noir-gen model entity.subentity1 field1 field2 ... fieldN
+
+and
+
+$ lein noir-gen view entity.subentity1 field1 field2 ... fieldN
+
+will make model and view for entities. From this version, I break them apart to make it easier to customize cruding for your needs.
+
+Also you need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.7"]. Each time you run setup, lein-noir-gen will tell you to add the dependency.
 
 The options which you may set in your 'project.clj':
 :noir-gen {:namespace alternate_namespace
@@ -16,9 +28,9 @@ If these options weren't set, lein-noir-gen will use the default namespace; the 
 
 ## Usage
 Install:
-lein plugin install lein-noir-gen 0.3.0
+lein plugin install lein-noir-gen 0.4.0
 
-Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually from $HOME/.lein/plugins/
+Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually: $ rm ~/.lein/plugins/lein-noir-gen-*.jar
 
 Run it from the root of your web-application.
 
@@ -53,6 +65,10 @@ Then run:
 $ lein run
 
 Enjoy!
+
+## Back-up
+
+When a command is run, it will just write things as asked, without warning about old files.
 
 ## License
 
