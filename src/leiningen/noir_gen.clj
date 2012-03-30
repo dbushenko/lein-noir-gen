@@ -41,17 +41,17 @@
                         {:namespace namespace,
                          :entity entity,
                          :entity-title (make-title entity),
-                         :entity_path (path-to-entity entity),
-                         :param (parameterize-entity entity),
+                         :entity-path (make-path entity),
+                         :param (make-form-name entity),
                          :fields field})
           templates (render (slurp-resource (str "templates/entity_templates.clj"))
                             {:namespace namespace,
                              :entity entity,
-                              :entity_path (path-to-entity entity),
-                              :param (parameterize-entity entity),
+                              :entity-path (make-path entity),
+                              :param (make-form-name entity),
                              :fields field})]
-      (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_pages.clj") pages)
-      (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_templates.clj") templates))))
+      (->file (str "./src/" namespace "/views/" (make-path entity) "_pages.clj") pages)
+      (->file (str "./src/" namespace "/views/" (make-path entity) "_templates.clj") templates))))
 
 (defn crud-model [namespace entity fields]
   (let [field (map #(hash-map :name %) fields)]
@@ -60,7 +60,7 @@
                          :entity entity,
                          :fields field})
                          ]
-      (->file (str "./src/" namespace "/models/" (path-to-entity entity) "_model.clj") model))))
+      (->file (str "./src/" namespace "/models/" (make-path entity) "_model.clj") model))))
 
 (defn noir-gen 
   "Create CRUD-pages for a Noir project.
