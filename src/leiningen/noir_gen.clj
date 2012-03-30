@@ -80,5 +80,7 @@ Options which you may set in project.clj:
         (condp = task
           "setup" (crud-setup namespace database)
           "model" (crud-model namespace (first args) (next args))
+          "all"   (do (crud-model namespace (first args) (next args))
+                      (crud-view namespace (first args) (first args) (next args)))
           "view" (crud-view namespace (first args) (second args) (next (next args)))
                  (print-help))))
