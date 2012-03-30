@@ -35,7 +35,7 @@
   (println "Remember adding dependency to your 'project.clj' for congo-mongo like that:")
   (println "[congomongo \"0.1.7\"]"))
 
-(defn crud-view [namespace entity fields]
+(defn crud-view [namespace model entity fields]
   (let [field (map #(hash-map :name %) fields)]
     (let [pages (render (slurp-resource (str "templates/entity_pages.clj"))
                         {:namespace namespace,
@@ -43,12 +43,14 @@
                          :entity-title (make-title entity),
                          :entity-path (make-path entity),
                          :param (make-form-name entity),
+                         :model model,
                          :fields field})
           templates (render (slurp-resource (str "templates/entity_templates.clj"))
                             {:namespace namespace,
                              :entity entity,
                               :entity-path (make-path entity),
                               :param (make-form-name entity),
+                              :model model,
                              :fields field})]
       (->file (str "./src/" namespace "/views/" (make-path entity) "_pages.clj") pages)
       (->file (str "./src/" namespace "/views/" (make-path entity) "_templates.clj") templates))))
@@ -78,5 +80,5 @@ Options which you may set in project.clj:
         (condp = task
           "setup" (crud-setup namespace database)
           "model" (crud-model namespace (first args) (next args))
-          "view" (crud-view namespace (first args) (next args))
+          "view" (crud-view namespace (first args) (first args) (next (next args)))
                  (print-help))))
