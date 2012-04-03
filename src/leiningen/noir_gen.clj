@@ -18,8 +18,8 @@
         templates (render (slurp-resource (str "templates/entity_templates.clj"))
                           {:namespace namespace,
                            :entity entity,
-                            :entity_path (path-to-entity entity),
-                            :param (parameterize-entity entity),
+                           :entity_path (path-to-entity entity),
+                           :param (parameterize-entity entity),
                            :fields fields})
         model (render (slurp-resource (str "templates/entity_model.clj"))
                       {:namespace namespace,
@@ -31,7 +31,7 @@
         srv (render (slurp-resource (str "templates/srv.clj"))
                     {:namespace namespace})
         default (render (slurp-resource (str "templates/default.clj"))
-                    {:namespace namespace})]
+                        {:namespace namespace})]
     (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_pages.clj") pages)
     (->file (str "./src/" namespace "/views/" (path-to-entity entity) "_templates.clj") templates)
     (->file (str "./src/" namespace "/models/" (path-to-entity entity) "_model.clj") model)

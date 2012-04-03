@@ -25,22 +25,22 @@
 (defn ->file [path-to-file content]
   "Quick create new file with directory structure"
   (do
-  (.mkdirs (.getParentFile (file path-to-file)))
-  (spit
-   (file path-to-file) content)))
+    (.mkdirs (.getParentFile (file path-to-file)))
+    (spit
+     (file path-to-file) content)))
 
 (defn path-to-entity [entity]
   (-> (str entity)
-    (clojure.string/replace "." "/")
+      (clojure.string/replace "." "/")
       (clojure.string/replace "-" "_")))
 
 (defn parameterize-entity [entity]
   (-> (str entity)
-    (clojure.string/replace "-" "_")
+      (clojure.string/replace "-" "_")
       (clojure.string/replace "." "-")))
 
 (defn make-title [entity]
   (-> (str entity)
-    (clojure.string/replace "." " >> ")
+      (clojure.string/replace "." " >> ")
       (clojure.string/replace "-" " > ")
-        (clojure.string/capitalize)))
+      (clojure.string/capitalize)))

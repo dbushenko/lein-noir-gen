@@ -30,7 +30,7 @@
    {{/fields}}[:br]
    [:a {:href (url-for entity/{{param}}_list)} "Back"]])
 
-(defn form [url button-text & [{{#fields}}{{name}} {{/fields}}& rest]]
+(defn form [url button-text & [{{#fields}}{{name}} {{/fields}}& args]]
   [:form {:method "POST", :action url}
    {{#fields}}[:label {:for "{{name}}"} (str (clojure.string/capitalize "{{name}}") ":")]
    [:input {:id "{{name}}", :name "{{name}}", :type "text", :value {{name}}}]
