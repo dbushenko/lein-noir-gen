@@ -1,4 +1,5 @@
 (ns leiningen.utils
+  (:require [clojure.string])
   (:use [clojure.java.io]))
 
 ;;From the maginalia source: http://fogus.me/fun/marginalia/
