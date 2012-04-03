@@ -8,6 +8,12 @@
 (defn fetch [id]
   (mongo/fetch-one :{{entity}} :where {:_id (Long/parseLong id)}))
 
+(defn fetch-list [conditions-map]
+  (mongo/fetch :{{entity}} :where conditions-map))
+
+(defn fetch [conditions-map]
+  (mongo/fetch-one :{{entity}} :where conditions-map))
+
 (defn create [{{#fields}}{{name}} {{/fields}}]
   (mongo/insert! :{{entity}} {:_id (db/next-id "{{entity}}"),{{#fields}} :{{name}} {{name}}{{/fields}}}))
 
