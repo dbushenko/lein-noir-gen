@@ -4,6 +4,14 @@ Noir-gen creates default view and model for the specified entity. It uses the Mo
 
 The generated pages have some basic layout made with Bootstrap. The examples of generated pages are here: https://docs.google.com/open?id=0BzmL7xzGeOtOYjFkZjg4ZjQtYjMwNy00N2M4LTg2MzQtOGFhYzFhYmJkMWEy https://docs.google.com/open?id=0BzmL7xzGeOtOMmY4MDNlMjItODU5ZS00Y2Q1LWEzM2EtZGM1ZDRiNDUxMDk0
 
+## Warning!
+
+Version noir-gen 0.4.0 is adopted to the brand-new noir 1.3.0-beta2 which has breaking changes since it uses hiccup 1.0.
+
+If you use noir 1.2.1 (and up to 1.3.0-beta1) then the right version of noir-gen is 0.3.0.
+
+Otherwise, use noir-gen 0.4.0 and higher.
+
 ## Overview
 
 The plugin comes with three commands:
@@ -42,13 +50,13 @@ $ lein noir new project-name
 
 $ cd project-name
 
-$ rm -f src/<project-name>/views/common.clj
+$ rm -f src/project-name/views/common.clj (optional)
 
-$ rm -f src/<project-name>/views/welcome.clj
+$ rm -f src/project-name/views/welcome.clj (optional)
 
 $ lein noir-gen setup
 
-$ lein noir-gen scaffold article title author datebody
+$ lein noir-gen scaffold article title author date body
 
 $ lein noir-gen scaffold admin.pages title body
 
