@@ -2,11 +2,27 @@
 This is a CRUD-actions generator for a Noir-project. It is heavily inspired by the Rails generators.
 Noir-gen creates default view and model for the specified entity. It uses the Mongodb to store the models.
 
-The generated pages have some basic layout made with Bootstrap. The examples of generated pages are here:
-https://docs.google.com/open?id=0BzmL7xzGeOtOYjFkZjg4ZjQtYjMwNy00N2M4LTg2MzQtOGFhYzFhYmJkMWEy
-https://docs.google.com/open?id=0BzmL7xzGeOtOMmY4MDNlMjItODU5ZS00Y2Q1LWEzM2EtZGM1ZDRiNDUxMDk0
+The generated pages have some basic layout made with Bootstrap. The examples of generated pages are here: https://docs.google.com/open?id=0BzmL7xzGeOtOYjFkZjg4ZjQtYjMwNy00N2M4LTg2MzQtOGFhYzFhYmJkMWEy https://docs.google.com/open?id=0BzmL7xzGeOtOMmY4MDNlMjItODU5ZS00Y2Q1LWEzM2EtZGM1ZDRiNDUxMDk0
 
-While generating, it rewrites the file 'server.clj' -- do not edit it manually. Also you need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.7"]. Each time you generate an entity, lein-noir-gen will tell you to add the dependency.
+## Overview
+
+The plugin comes with three commands:
+
+$ lein noir-gen setup
+
+will prepare such things like db.clj, server.clj, views/default.clj and some other resources. In most case you have to run it only once;
+
+$ lein noir-gen model entity.subentity1 field1 field2 ... fieldN
+
+and
+
+$ lein noir-gen view entity.subentity1 field1 field2 ... fieldN
+
+You may generate views and models all in one go with the command 'scaffold':
+
+$ lein noir-gen scaffold entity.subentity1 field1 field2 ... fieldN
+
+Also you need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.8"]. Each time you run setup, lein-noir-gen will tell you to add the dependency.
 
 The options which you may set in your 'project.clj':
 :noir-gen {:namespace alternate_namespace
@@ -16,23 +32,9 @@ If these options weren't set, lein-noir-gen will use the default namespace; the 
 
 ## Usage
 Install:
-lein plugin install lein-noir-gen 0.3.0
+lein plugin install lein-noir-gen 0.4.0
 
-Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually from $HOME/.lein/plugins/
-
-Run it from the root of your web-application.
-
-lein noir-gen my-entity field1 field2 ... fieldN
-
-$ lein noir-gen article title body author date published
-
-If you want more complex directory structure, use dots "." in your entity string.
-
-$ lein noir-gen entity.subentity1 field1 field2 ... fieldN
-
-$ lein noir-gen entity.subentity2 field1 field2 ... fieldN
-
-$ lein noir-gen another-entity.subentity field1 field2 ... fieldN
+Warning: you must have no previous versions of lein-noir-gen installed. You may delete it manually: $ rm ~/.lein/plugins/lein-noir-gen-*.jar
 
 ## Step by step (newproject)
 
@@ -40,11 +42,21 @@ $ lein noir new project-name
 
 $ cd project-name
 
-Add [congomongo "0.1.7"] to project.clj
+$ rm -f src/<project-name>/views/common.clj
+
+$ rm -f src/<project-name>/views/welcome.clj
+
+$ lein noir-gen setup
+
+$ lein noir-gen scaffold article title author datebody
+
+$ lein noir-gen scaffold admin.pages title body
+
+Add [congomongo "0.1.8"] to project.clj
 
 Enjoy cruding!
 
-Now test generated stuffs. Start mongod (in an other terminator, because you don't want to stop it, right?)
+Now test generated stuffs. Start mongod (in the other terminal, because you don't want to stop it, right?)
 
 $ mongod --dbpath path-to-your-db
 
@@ -53,6 +65,10 @@ Then run:
 $ lein run
 
 Enjoy!
+
+## Back-up
+
+When a command is run, it will just write things as asked, without warning about old files.
 
 ## License
 

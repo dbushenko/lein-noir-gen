@@ -29,12 +29,12 @@
     (spit
      (file path-to-file) content)))
 
-(defn path-to-entity [entity]
+(defn make-path [entity]
   (-> (str entity)
       (clojure.string/replace "." "/")
       (clojure.string/replace "-" "_")))
 
-(defn parameterize-entity [entity]
+(defn make-form-name [entity]
   (-> (str entity)
       (clojure.string/replace "-" "_")
       (clojure.string/replace "." "-")))

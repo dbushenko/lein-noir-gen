@@ -5,3 +5,4 @@ pom.xml
 /db/
 /classes/
 .lein-deps-sum
+/mock/
