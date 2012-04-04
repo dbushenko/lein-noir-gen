@@ -51,4 +51,4 @@ Options which you may set in project.clj:
        (generate namespace entity (map #(hash-map :name %) fields) database))
      (println (str "The entity '" entity "' was successfully generated!"))
      (println "Remember adding dependency to your 'project.clj' for congo-mongo like that:")
-     (println "[congomongo \"0.1.7\"]")))
+     (println "[congomongo \"0.1.8\"]")))
