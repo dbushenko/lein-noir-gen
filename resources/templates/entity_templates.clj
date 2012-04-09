@@ -18,11 +18,17 @@
      (list-item-actions id)
      [:br]]))
 
-(defn show-list [{{param}}_list]
+(defn show-list [{{param}}_list & [nx & [prev]]]
   [:div
    (for [item {{param}}_list] 
      (list-item item))
-   [:a {:href (url-for entity/new_{{param}}) :class "btn btn-info"} "New"]])
+   [:a {:href (url-for entity/new_{{param}}) :class "btn btn-info"} "New"]
+   [:div
+    (if-not (nil? prev)
+      [:a {:href prev} "<< Prev"])
+    (if-not (or (nil? prev) (nil? nx))  " | ")
+    (if-not (nil? nx)
+      [:a {:href nx} "Next >>"])]])
 
 (defn show [item]
   [:div

@@ -5,10 +5,35 @@
               [{{namespace}}.models.{{model}}_model :as {{model}}_model])
     (:use [noir.core]))
 
+;;;;;;;; Utilities ;;;;;;;;;;;;
+
+(defn prev-skip [skip limit]
+  (let [result (- skip limit)]
+    (if (< result 0)  0  result)))
+
+(defn next-skip [skip limit count]
+  (let [result (+ skip limit)]
+    (if (> result (- count 1))  count  result)))
+
+;;;;;;;;; Pages ;;;;;;;;;;;;;;;
+
 (defpage {{param}}_list "/{{entity-path}}" []
   (default/layout
     [:h2 (str "{{entity-title}}" " list")]
-    ({{param}}_view/show-list ({{model}}_model/fetch-list))))
+    ({{param}}_view/show-list ({{model}}_model/fetch-list)
+     (url-for {{param}}_list_skip {:skip {{model}}_model/*limit*}))))
+
+(defpage {{param}}_list_skip "/{{entity-path}}/skip/:skip" {skip :skip}
+  (default/layout
+    [:h2 (str "{{entity-title}}" " list")]
+    (let [cmap {}                                   ;; Add conditions here like that: {:tag "news", :urgency "high"}
+          limit article_model/*limit*               ;; How many entities show on the page
+          cnt (article_model/fetch-list-count cmap) ;; How many entities are there in the database
+          sk (Integer/parseInt skip)                ;; How many entities skip from the beginning
+          prev (url-for {{param}}_list_skip {:skip (prev-skip sk limit)})    ;; Url for the previous page
+          nx (url-for {{param}}_list_skip {:skip (next-skip sk limit cnt)})] ;; Url for the next page
+      ({{param}}_view/show-list ({{model}}_model/fetch-list cmap sk)
+       nx prev))))
 
 (defpage view_{{param}} "/{{entity-path}}/view/:id" {id :id}
   (default/layout
