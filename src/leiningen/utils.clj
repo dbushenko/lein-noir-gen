@@ -24,10 +24,10 @@
 
 (defn ->file [path-to-file content]
   "Quick create new file with directory structure"
-  (do
-    (.mkdirs (.getParentFile (file path-to-file)))
+  (let [path (clojure.string/replace path-to-file "-" "_")]
+    (.mkdirs (.getParentFile (file path)))
     (spit
-     (file path-to-file) content)))
+     (file path) content)))
 
 (defn make-path [entity]
   (-> (str entity)

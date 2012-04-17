@@ -19,12 +19,13 @@
   (->file (str "./resources/public/css/bootstrap.css") (slurp-resource (str "css/bootstrap.css")))
   (->file (str "./resources/public/css/default.css") (slurp-resource (str "css/default.css"))))
 
-(defn crud-setup [namespace database]
+(defn crud-setup [raw-ns namespace database]
   (let [db (render (slurp-resource (str "templates/db.clj"))
                    {:namespace namespace,
                     :database database})
         srv (render (slurp-resource (str "templates/srv.clj"))
-                    {:namespace namespace})
+                    {:namespace namespace
+                     :rawns raw-ns})
         default (render (slurp-resource (str "templates/default.clj"))
                         {:namespace namespace})]
     (->file (str "./src/" namespace "/db.clj") db)
@@ -70,7 +71,7 @@
         pages (render (slurp-resource (str "templates/user_pages.clj"))
                       {:namespace namespace})
         templates (render (slurp-resource (str "templates/user_templates.clj"))
-                      {:namespace namespace})
+                          {:namespace namespace})
         ]
     (->file (str "./src/" namespace "/models/" (make-path "user") "_model.clj") model)
     (->file (str "./src/" namespace "/views/" (make-path "user") "_pages.clj") pages)
@@ -82,15 +83,13 @@ Uses the default namespace.
 Options which you may set in project.clj:
 :noir-gen {:namespace my_namespace, :database my_database}"
   [project task & args]
-  (let [namespace
-        (or (:namespace (:noir-gen project))
-            (:group project))
-        database
-        (or (:database (:noir-gen project))
-            (:group project))]
-
+  (let [raw-ns (or (:namespace (:noir-gen project))
+                   (:group project))
+        namespace (clojure.string/replace raw-ns "-" "_")
+        database (or (:database (:noir-gen project))
+                     (:group project))]
     (condp = task
-      "setup" (crud-setup namespace database)
+      "setup" (crud-setup raw-ns namespace database)
       "model" (crud-model namespace (first args) (next args))
       "view" (crud-view namespace (first args) (second args) (drop 2 args))
       "scaffold"   (do (crud-model namespace (first args) (next args))

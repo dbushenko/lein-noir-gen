@@ -1,4 +1,4 @@
-(ns {{namespace}}.server
+(ns {{rawns}}.server
   (:require [noir.server :as server]
             [{{namespace}}.db :as db]))
 
