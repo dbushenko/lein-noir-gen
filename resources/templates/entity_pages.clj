@@ -27,8 +27,8 @@
   (default/layout
     [:h2 (str "{{entity-title}}" " list")]
     (let [cmap {}                                   ;; Add conditions here like that: {:tag "news", :urgency "high"}
-          limit article_model/*limit*               ;; How many entities show on the page
-          cnt (article_model/fetch-list-count cmap) ;; How many entities are there in the database
+          limit {{entity}}_model/*limit*               ;; How many entities show on the page
+          cnt ({{entity}}_model/fetch-list-count cmap) ;; How many entities are there in the database
           sk (Integer/parseInt skip)                ;; How many entities skip from the beginning
           prev (url-for {{param}}_list_skip {:skip (prev-skip sk limit)})    ;; Url for the previous page
           nx (url-for {{param}}_list_skip {:skip (next-skip sk limit cnt)})] ;; Url for the next page
