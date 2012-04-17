@@ -14,23 +14,53 @@ Otherwise, use noir-gen 0.4.0 and higher.
 
 ## Overview
 
-The plugin comes with three commands:
+The plugin comes with the following commands:
+
+1) Basic setup which should be done at least once:
 
 $ lein noir-gen setup
 
-will prepare such things like db.clj, server.clj, views/default.clj and some other resources. In most case you have to run it only once;
+This will prepare such things like db.clj, server.clj, views/default.clj and some other resources. In most cases you have to run it only once.
+
+2) Model generating:
+
+$ lein noir-gen model entity1 field1 field2 ... fieldN
+
+or
 
 $ lein noir-gen model entity.subentity1 field1 field2 ... fieldN
 
-and
+3) View generating:
+
+$ lein noir-gen view entity1 field1 field2 ... fieldN
+
+or
 
 $ lein noir-gen view entity.subentity1 field1 field2 ... fieldN
 
-You may generate views and models all in one go with the command 'scaffold':
+3) You may generate views and models all in one go with the command 'scaffold':
+
+$ lein noir-gen scaffold entity1 field1 field2 ... fieldN
+
+or
 
 $ lein noir-gen scaffold entity.subentity1 field1 field2 ... fieldN
 
-Also you need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.8"]. Each time you run setup, lein-noir-gen will tell you to add the dependency.
+4) Login functionality generating
+
+$ lein noir-gen login
+
+This will generate basic login/logout functionality. It is an experimental feature and the generated code is rather blunt. But you may use it as a quck and easy solution or as a stub for your future login functionality.
+
+After generating login functionality you will be able to use three URIs:
+
+* /login -- for login (sets the :username in the session);
+* /logout -- for logout (resets the :username in the session);
+* /user/edit -- for changing the password.
+
+Bear in mind that when you create the application from scratch, there will be no users in the database that's why you will not be able to login. Use the '/user/edit' URI then. It will check whether the user 'root' exists. If no -- you will be able to set the password for the user 'root' without the login. Otherwise the login is required.
+
+For database access you will need to add the congo-mongo dependency to your 'project.clj' like this: [congomongo "0.1.8"]. Each time you run setup, lein-noir-gen will tell you to add the dependency.
 
 The options which you may set in your 'project.clj':
 :noir-gen {:namespace alternate_namespace

@@ -64,6 +64,18 @@
           ]
       (->file (str "./src/" namespace "/models/" (make-path entity) "_model.clj") model))))
 
+(defn gen-login [namespace]
+  (let [model (render (slurp-resource (str "templates/user_model.clj"))
+                      {:namespace namespace})
+        pages (render (slurp-resource (str "templates/user_pages.clj"))
+                      {:namespace namespace})
+        templates (render (slurp-resource (str "templates/user_templates.clj"))
+                      {:namespace namespace})
+        ]
+    (->file (str "./src/" namespace "/models/" (make-path "user") "_model.clj") model)
+    (->file (str "./src/" namespace "/views/" (make-path "user") "_pages.clj") pages)
+    (->file (str "./src/" namespace "/views/" (make-path "user") "_templates.clj") templates)))
+
 (defn noir-gen 
   "Create CRUD-pages for a Noir project.
 Uses the default namespace.
@@ -83,4 +95,5 @@ Options which you may set in project.clj:
       "view" (crud-view namespace (first args) (second args) (drop 2 args))
       "scaffold"   (do (crud-model namespace (first args) (next args))
                        (crud-view namespace (first args) (first args) (next args)))
+      "login" (gen-login namespace)
       (print-help))))

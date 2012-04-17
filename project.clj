@@ -1,6 +1,6 @@
-(defproject lein-noir-gen "0.4.1"
+(defproject lein-noir-gen "0.4.2"
   :description "Noir CRUD generator"
-  :dependencies [[org.clojure/clojure "1.3.0"]
+  :dependencies [[org.clojure/clojure "1.4.0"]
                  [de.ubercode.clostache/clostache "0.6.0"]
                  [midje "1.3.1"]]
   :eval-in-leiningen true
