@@ -1,4 +1,4 @@
-(defproject lein-noir-gen "0.5.0"
+(defproject lein-noir-gen "1.0.0"
   :description "Noir CRUD generator"
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [de.ubercode.clostache/clostache "0.6.0"]

@@ -1,12 +1,15 @@
 # lein-noir-gen
 This is a CRUD-actions generator for a Noir-project. It is heavily inspired by the Rails generators.
-Noir-gen creates default view and model for the specified entity. It uses the Mongodb to store the models.
+Noir-gen creates default view and model for the specified entity. It uses the Mongodb to store the models and has support of heroku hosting out-of-the box.
 
 The generated pages have some basic layout made with Bootstrap. The examples of generated pages are here: https://docs.google.com/open?id=0BzmL7xzGeOtOYjFkZjg4ZjQtYjMwNy00N2M4LTg2MzQtOGFhYzFhYmJkMWEy https://docs.google.com/open?id=0BzmL7xzGeOtOMmY4MDNlMjItODU5ZS00Y2Q1LWEzM2EtZGM1ZDRiNDUxMDk0
 
 Also you can see a screencast about how to create a simple blog with Clojure, Noir and noir-gen in 15 minutes here: http://youtu.be/-Fo4djTlmVY
 
-Version noir-gen 0.5.0 is adopted to the brand-new noir 1.3.0-beta2 which has breaking changes since it uses hiccup 1.0. Tested against Clojure 1.4.0.
+Version noir-gen 1.0.0 is adopted to the brand-new noir 1.3.0-beta3 which has breaking changes since it uses hiccup 1.0. Tested against Clojure 1.4.0.
+
+##
+Warning! This release doesn't work with leiningen 2.x.
 
 ## Overview
 
